@@ -25,7 +25,7 @@ module.exports.getContact = async (req, res) => {
 //CREATE un contact
 module.exports.createContact = async (req, res) => {
     try {
-        let contact = new Task(req.body)
+        let contact = new Contact(req.body)
         contact = await contactApiService.createContact(contact)
         return res.status(201).json({ status: 201, data: contact, message: "Succesfully Contact Saved" });
     } catch (error) {
@@ -36,7 +36,7 @@ module.exports.createContact = async (req, res) => {
 //UPDATE un contact par l'ID
 module.exports.updateContact = async (req, res) => {
     try {
-        let result = await contactApiService.updateUser({_id: req.params.id}, req.body)
+        let result = await contactApiService.updateContact({_id: req.params.id}, req.body)
         return res.status(200).json({ status: 200, data: result, message: "Succesfully Contact Updated" });
     } catch (error) {
         return res.status(400).json({ status: 400, message: error.message });

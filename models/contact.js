@@ -11,8 +11,4 @@ const contactSchema = mongoose.Schema({
     user: {type: mongoose.Schema.Types.ObjectId, ref: 'Contact'}
 });
 
-
-const Contact = mongoose.models.Contact || mongoose.model('Contact', contactSchema);
-
-
-module.exports = Contact;
+module.exports = mongoose.model('Contact', contactSchema);
