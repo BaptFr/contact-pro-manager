@@ -1,0 +1,28 @@
+1. Installation environnement
+    Node
+    Gestionnaire de paquet NPM
+    Express, Mongoose, Nodemon
+    Gitignore(/node_module; .env)
+    Script start
+    variable .env(changement Nom de DB dans l'url avant le '?' pour la création)
+
+2.Architecture & refactorisation
+    Dossiers:
+        models
+        routes
+        services
+        controllers
+        +views
+        public(autres)
+
+3. Models
+    un model User / un model contact
+    !!!! 1 / many
+    schémas détails sur pdf
+
+
+4.
+
+5.
+
+
