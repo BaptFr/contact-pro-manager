@@ -17,12 +17,19 @@
 
 3. Models
     un model User / un model contact
-    !!!! 1 / many
-    schémas détails sur pdf
+    !!!! 1       /   *
+    détail des schémas sur pdf
 
 
-4.
+4. APIs
 
-5.
+5. Routes
+    routes user x5
+    routes contact x 5
+    App.js
 
+6. Controllers
+
+
+7. Views
 
