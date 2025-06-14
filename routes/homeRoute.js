@@ -1,7 +1,9 @@
 const express = require('express');
 const router = express.Router();
-const homeController = require('../controllers/homeController');
+const authMiddleware = require ('../middlewares/authMiddleware');
 
+router.get('/', authMiddleware, (req, res) => {
+    res.render('home', { user:req.session.user });
+});
 
-router.get('/', homeController.showHome);
 module.exports = router;

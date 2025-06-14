@@ -6,7 +6,7 @@ module.exports.getContacts = async (query) => {
 
     try {
         var contacts = await Contact.find(query);
-        return contacts;    
+        return contacts;
     } catch(error) {
         // Log Errors
         throw Error(`Error while query all Contacts : ${error.message}`)
@@ -18,7 +18,7 @@ module.exports.getContact = async (query) => {
 
     try {
         var contact = await Contact.findOne(query).populate('user');
-        return contact;    
+        return contact;
     } catch(error) {
         // Log Errors
         throw Error(`Error while query one Contact : ${error.message}`)
@@ -31,12 +31,12 @@ module.exports.createContact = async (contact) => {
     try {
         var contact = await contact.save();
         console.log(contact);
-        await User.findByIdAndUpdate({_id: contact.user}, { $push: { contacts: contact._id } });     
+        await User.findByIdAndUpdate({_id: contact.user}, { $push: { contacts: contact._id } });
         return contact;
     } catch(error) {
         // Log Errors
         throw Error(`Error while save Contact : ${error.message}`)
-    }    
+    }
 }
 
 //UPDATE x1 contact

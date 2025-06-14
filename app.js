@@ -6,6 +6,7 @@ const dotenv = require('dotenv');
 const session = require('express-session');
 const userApiRoute = require('./routes/userApiRoute');
 const contactApiRoute = require('./routes/contactApiRoute');
+const authRoute = require('./routes/authRoute');
 const homeRoute = require('./routes/homeRoute');
 
 const path = require('path')
@@ -15,7 +16,7 @@ const app = express();
 //Env
 dotenv.config();
 
-//Config pour views
+//Config moteur templates
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 
@@ -24,17 +25,11 @@ app.use(bodyParser.json());
 
 //Configuration session (avant routes)
 app.use(session({
-    secret: 'une_chaine_secrete_pour_la_session',
+    secret: process.env.SESSION_SECRET,
     resave: false,
     saveUninitialized: false,
     cookie: { maxAge: 60 * 60 * 1000 }  // 1 heure
 }));
-
-
-
-
-
-
 
 //Connexion MongoDB
 mongoose.connect(process.env.MONGO_CONNECTION)
@@ -45,9 +40,8 @@ mongoose.connect(process.env.MONGO_CONNECTION)
 app.use("/api/user", userApiRoute);
 app.use("/api/contact", contactApiRoute);
 app.use("/", homeRoute);
-
+app.use("/auth", authRoute);
 //Port lancement server
 app.listen(process.env.PORT, () => {
     console.log(`Le serveur est démarré sur le port ${process.env.PORT} !`);
 });
-
