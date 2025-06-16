@@ -22,48 +22,46 @@
                 <a href="/contact/new" class="float-end btn btn-success my-1">AJOUTER</a>
             </div>
 
-            <div class="card-content">
-                <table class="table table-bordered">
-                    <thead class="table-dark">
-                    <tr>
-                        <th scope="col">Nom</th>
-                        <th scope="col">Prénom</th>
-                        <th scope="col">Société</th>
-                        <th width="20%" scope="col">Adresse</th>
-                        <th scope="col">Tel</th>
-                        <th scope="col">Secteur</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                        <tr id="tr-1">
-                            <td>Richard</td>
-                            <td>Nicolas</td>
-                            <td>Campus Région</td>
-                            <td>78 Rte de Paris, 69260 Charbonnières</td>
-                            <td>04 26 73 66 76</td>
-                            <td>Education</td>
-                            <td>
-                                <a href="/contact/1" id="a-view-1" class="btn btn-primary">VOIR</a>
-                                <a href="/contact/edit/1" id="a-edit-1" class="btn btn-warning">MODIFIER</a>
-                                <button id="btn-delete-1" data-id="1" class="btn btn-danger btn-delete">SUPPRIMER</button>
-                            </td>
-                        </tr>                        
-                        <tr id="tr-2">
-                            <td>Rondeau</td>
-                            <td>Julien</td>
-                            <td>Apollo</td>
-                            <td>96 Bd Marius Vivier Merle, 69003 Lyon</td>
-                            <td>04 78 35 45 70</td>
-                            <td>Informatique</td>
-                            <td>
-                                <a href="/contact/2" id="a-view-2" class="btn btn-primary">VOIR</a>
-                                <a href="/contact/edit/2" id="a-edit-2" class="btn btn-warning">MODIFIER</a>
-                                <button id="btn-delete-2" data-id="2" class="btn btn-danger btn-delete">SUPPRIMER</button>
-                            </td>
-                        </tr>                        
-                    </tbody>
-                </table>
-            </div>
+
+                <div class="card-content">
+                    <table class="table table-bordered">
+                        <thead class="table-dark">
+                            <tr>
+                            <th>Nom</th>
+                            <th>Prénom</th>
+                            <th>Société</th>
+                            <th>Adresse</th>
+                            <th>Tel</th>
+                            <th>Secteur</th>
+                            <th>Actions</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <!-- Si le user à 0 contact-->
+                            <% if (contacts.length === 0) { %>
+                                <tr>
+                                    <td colspan="7" class="text-center">Aucun contact pour cet utilisateur.</td>
+                                </tr>
+                            <% } else { %>
+                                <% contacts.forEach(function(contact) { %>
+                                    <tr id="tr-<%= contact._id %>">
+                                        <td><%= contact.lastName %></td>
+                                        <td><%= contact.firstName %></td>
+                                        <td><%= contact.company %></td>
+                                        <td><%= contact.adress %></td>
+                                        <td><%= contact.phone %></td>
+                                        <td><%= contact.sector %></td>
+                                        <td>
+                                            <a href="/contact/<%= contact._id %>" id="a-view-1"  class="btn btn-primary">VOIR</a>
+                                            <a href="/contact/edit/<%= contact._id %>" id="a-edit-1" class="btn btn-warning">MODIFIER</a>
+                                            <button id="btn-delete-1" data-id="<%= contact._id %>" class="btn btn-danger btn-delete">SUPPRIMER</button>
+                                        </td>
+                                    </tr>
+                                <% }) %>
+                            <% } %>
+                        </tbody>
+                    </table>
+                </div>
         </div>
     </div>
 </div>

@@ -20,7 +20,8 @@ dotenv.config();
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 
-//ParserAPI
+//Parser Formulaire et données
+app.use(express.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
 //Configuration session (avant routes)

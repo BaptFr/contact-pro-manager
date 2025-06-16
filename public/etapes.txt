@@ -17,7 +17,7 @@
 
 3. Models
     un model User / un model contact
-    !!!! 1       /   *
+    !Attention models 1       /   *
     détail des schémas sur pdf
 
 

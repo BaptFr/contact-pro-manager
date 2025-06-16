@@ -46,7 +46,7 @@ module.exports.updateContact = async (query, contact) => {
     } catch(error) {
         // Log Errors
         throw Error(`Error while update Contact : ${error.message}`)
-    }          
+    }
 }
 
 //DELETE un contact
