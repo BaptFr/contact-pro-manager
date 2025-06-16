@@ -2,7 +2,7 @@ const userApiService = require("../services/userApiService");
 const User = require("../models/user");
 const bcrypt = require("bcrypt");
 
-//Récupèration liste de tous les users
+//GET Récupèration liste de tous les users
 module.exports.getUsers = async (req, res) => {
     try{
         let users = await userApiService.getUsers({})
@@ -12,7 +12,7 @@ module.exports.getUsers = async (req, res) => {
     }
 };
 
-//Récupèration d'un user avec l'ID
+//GET Récupèration d'un user avec l'ID
 module.exports.getUser = async(req, res) => {
      try {
         let user = await userApiService.getUser({ _id: req.params.id })
@@ -22,7 +22,7 @@ module.exports.getUser = async(req, res) => {
     }
 };
 
-//Création d'un user
+//CREATE Création d'un user
 module.exports.createUser = async (req, res) => {
     try {
         // hash le mdp avec bcrypt
@@ -37,7 +37,7 @@ module.exports.createUser = async (req, res) => {
     }
 }
 
-//Update d'un user par l'ID
+//UPDATE d'un user par l'ID
 module.exports.updateUser = async (req, res) => {
     try {
         // hash le mdp avec bcrypt
@@ -51,7 +51,7 @@ module.exports.updateUser = async (req, res) => {
     }
 }
 
-//Supprimer un user par l'ID
+//DELETE un user par l'ID
 module.exports.deleteUser = async (req, res) => {
     try {
         let result = await userApiService.deleteUser({ _id: req.params.id });

@@ -1,12 +1,15 @@
 const authService = require('../services/authService');
 const Contact = require('../models/contact');
+const contactService = require('../services/contactApiService');
 
 
+//RENDU Page de connection
 exports.showLoginPage = (req, res) => {
     res.render('connection', {message : ''});
 };
 
 
+//AUTHENTIFICATION
 exports.login = async (req, res) => {
     try{
         const { email, password } = req.body;
@@ -14,7 +17,7 @@ exports.login = async (req, res) => {
         if(!user) {
             return res.render('connection', { message: "Combinaison d'Email et de Mot de passe incorrecte"});
         }
-        //Création Session
+        //Création Session maintien de connection
         req.session.user = {
             id: user._id,
             email: user.email,
@@ -22,20 +25,19 @@ exports.login = async (req, res) => {
             firstName: user.firstName
         };
         //Redirection
-        res.redirect('/');
+        res.redirect('/home');
     }catch(error){
         res.status(400).json({ status: 400, message: error.message });
     }
 };
 
 
+//RENDU HomePage après authentification
 exports.showHomePage = async (req, res) => {
-    try {
-        const contacts = await Contact.find({ user: req.session.user.id });
-        res.render('home', {
-            user: req.session.user,
-            contacts
-        });
+     try {
+        const userId = req.session.user.id;
+        const contacts = await contactService.getContacts({ user: userId });
+        res.render('home', { user: req.session.user, contacts });
     } catch (error) {
         res.status(500).send('Erreur lors de la récupération des contacts');
     }

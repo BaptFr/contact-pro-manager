@@ -7,7 +7,6 @@ const session = require('express-session');
 const userApiRoute = require('./routes/userApiRoute');
 const contactApiRoute = require('./routes/contactApiRoute');
 const authRoute = require('./routes/authRoute');
-const homeRoute = require('./routes/homeRoute');
 
 const path = require('path')
 
@@ -40,8 +39,8 @@ mongoose.connect(process.env.MONGO_CONNECTION)
 //URL de départ des routes de l'api
 app.use("/api/user", userApiRoute);
 app.use("/api/contact", contactApiRoute);
-app.use("/", homeRoute);
-app.use("/auth", authRoute);
+app.use("/", authRoute);
+
 //Port lancement server
 app.listen(process.env.PORT, () => {
     console.log(`Le serveur est démarré sur le port ${process.env.PORT} !`);

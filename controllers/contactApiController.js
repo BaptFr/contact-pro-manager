@@ -2,7 +2,7 @@
 const contactApiService = require("../services/contactApiService");
 const Contact = require("../models/contact");
 
-//GET Récupère liste des contact
+//GET Récupère liste des contacts
 module.exports.getContacts = async (req, res) => {
     try {
         let contacts = await contactApiService.getContacts({})
@@ -52,3 +52,6 @@ module.exports.deleteContact = async (req, res) => {
         return res.status(400).json({ status: 400, message: error.message });
     }
 }
+
+
+//AFFICHER pas d'édition de contact
