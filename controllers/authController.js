@@ -13,13 +13,13 @@ exports.showLoginPage = (req, res) => {
 exports.login = async (req, res) => {
     try{
         const { email, password } = req.body;
-        const user= await authService.authenticate( email, password);
+        const user = await authService.authenticate( email, password);
         if(!user) {
             return res.render('connection', { message: "Combinaison d'Email et de Mot de passe incorrecte"});
         }
         //Création Session maintien de connection
         req.session.user = {
-            id: user._id,
+            _id: user._id,
             email: user.email,
             lastName: user.lastName,
             firstName: user.firstName

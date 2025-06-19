@@ -6,6 +6,7 @@ const dotenv = require('dotenv');
 const session = require('express-session');
 const userApiRoute = require('./routes/userApiRoute');
 const contactApiRoute = require('./routes/contactApiRoute');
+const contactViewRoute = require('./routes/contactViewRoute');
 const authRoute = require('./routes/authRoute');
 
 const path = require('path')
@@ -40,6 +41,10 @@ mongoose.connect(process.env.MONGO_CONNECTION)
 app.use("/api/user", userApiRoute);
 app.use("/api/contact", contactApiRoute);
 app.use("/", authRoute);
+
+//View
+app.use('/contact', contactViewRoute);
+
 
 //Port lancement server
 app.listen(process.env.PORT, () => {

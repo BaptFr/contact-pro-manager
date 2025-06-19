@@ -4,11 +4,12 @@ const contactSchema = mongoose.Schema({
     lastName: { type: String, required: true },
     firstName: { type: String, required: true },
     company: { type: String, required: true },
-    adress: { type: String, required: true },
+    address: { type: String, required: true },
     phone: { type: Number, required: true },
     email: { type: String, required: true },
     sector: { type: String, required: true },
-    user: {type: mongoose.Schema.Types.ObjectId, ref: 'Contact'}
+    actif: { type: Boolean, default: false },
+    user: {type: mongoose.Schema.Types.ObjectId, ref: 'Contact', required: true}
 });
 
 module.exports = mongoose.model('Contact', contactSchema);

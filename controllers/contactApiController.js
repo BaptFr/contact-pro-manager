@@ -25,11 +25,31 @@ module.exports.getContact = async (req, res) => {
 //CREATE un contact
 module.exports.createContact = async (req, res) => {
     try {
-        let contact = new Contact(req.body)
-        contact = await contactApiService.createContact(contact)
-        return res.status(201).json({ status: 201, data: contact, message: "Succesfully Contact Saved" });
+        //Vérif session user
+        if (!req.session.user) {
+            return res.status(401).json({ status: 401, message: "Utilisateur non connecté" });
+        }
+        //Ajouts manuels:
+        //-user 
+        req.body.user = req.session.user._id;
+        console.log('req.body avant creation contact:', req.body);
+        //-checkbox 
+        req.body.actif = req.body.actif === 'on';
+
+        let contact = new Contact(req.body);
+        contact = await contactApiService.createContact(contact);
+        
+        //Redirection 
+        return res.redirect('/');
+
+        // return res.status(201).json({ 
+        //     status: 201, 
+        //     data: contact, 
+        //     message: "Succesfully created Contact"});
     } catch (error) {
-        return res.status(400).json({ status: 400, message: error.message });
+        console.error('Erreur lors de l’enregistrement :', error);
+        return res.status(400).render('add-item', {message: "Erreur lors de l'envoi du formulaire"});
+        
     }
 }
 
@@ -53,5 +73,3 @@ module.exports.deleteContact = async (req, res) => {
     }
 }
 
-
-//AFFICHER pas d'édition de contact
