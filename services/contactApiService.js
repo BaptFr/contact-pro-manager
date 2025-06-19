@@ -30,7 +30,6 @@ module.exports.createContact = async (contact) => {
 
     try {
         var contact = await contact.save();
-        console.log(contact);
         await User.findByIdAndUpdate({_id: contact.user}, { $push: { contacts: contact._id } });
         return contact;
     } catch(error) {

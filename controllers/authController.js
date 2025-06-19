@@ -25,7 +25,9 @@ module.exports.login = async (req, res) => {
             firstName: user.firstName
         };
         //Redirection
-        res.redirect('/home');
+        req.session.save(() => {
+            res.redirect('/home');
+        });
     }catch(error){
         res.status(400).json({ status: 400, message: error.message });
     }
@@ -35,8 +37,6 @@ module.exports.login = async (req, res) => {
 //RENDU HomePage après authentification
 module.exports.showHomePage = async (req, res) => {
      try {
-        
-        console.log('Session user:', req.session.user);
         const contacts = await contactService.getContacts({ user: req.session.user._id});
         res.render('home', { user: req.session.user, contacts });
     } catch (error) {

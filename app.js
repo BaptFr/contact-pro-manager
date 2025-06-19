@@ -40,10 +40,11 @@ mongoose.connect(process.env.MONGO_CONNECTION)
 //URL de départ des routes de l'api
 app.use("/api/user", userApiRoute);
 app.use("/api/contact", contactApiRoute);
-app.use("/", authRoute);
+
 
 //View
 app.use('/contact', contactViewRoute);
+app.use("/", authRoute);
 
 
 //Port lancement server

@@ -30,34 +30,33 @@ module.exports.createContact = async (req, res) => {
             return res.status(401).json({ status: 401, message: "Utilisateur non connecté" });
         }
         //Ajouts manuels:
-        //-user 
+        //-user
         req.body.user = req.session.user._id;
-        console.log('req.body avant creation contact:', req.body);
-        //-checkbox 
+        //-checkbox
         req.body.actif = req.body.actif === 'on';
 
         let contact = new Contact(req.body);
         contact = await contactApiService.createContact(contact);
-        
-        //Redirection 
+
+        //Redirection
         return res.redirect('/');
 
-        // return res.status(201).json({ 
-        //     status: 201, 
-        //     data: contact, 
-        //     message: "Succesfully created Contact"});
     } catch (error) {
         console.error('Erreur lors de l’enregistrement :', error);
         return res.status(400).render('add-item', {message: "Erreur lors de l'envoi du formulaire"});
-        
+
     }
 }
 
 //UPDATE un contact par l'ID
 module.exports.updateContact = async (req, res) => {
     try {
-        let result = await contactApiService.updateContact({_id: req.params.id}, req.body)
-        return res.status(200).json({ status: 200, data: result, message: "Succesfully Contact Updated" });
+        //gestion checkbox View
+        req.body.actif = req.body.actif === 'on';
+        let contact = new Contact(req.body);
+        contact = await contactApiService.updateContact({_id: req.params.id}, req.body);
+     //Redirection
+        return res.redirect('/');
     } catch (error) {
         return res.status(400).json({ status: 400, message: error.message });
     }

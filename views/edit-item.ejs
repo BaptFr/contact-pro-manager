@@ -15,53 +15,68 @@
                 <h3>MODIFICATION D'UN CONTACT</h3>
             </div>
             <div class="card-content mt-3">
-                <div id="erreur" class="alert alert-danger mt-3">
-                    erreurs
-                </div>
-                <form class="card-body" id="edit-car-form" method="post" action="/contact/edit/id">
+                <% if(message) { %>
+                    <div id="erreur" class="alert alert-danger mt-3">
+                            <%= message %>
+                    </div>
+                <% } %> 
+                <form class="card-body" id="edit-car-form" method="post" action="/contact/edit/<%= contact._id %>">
                     <div class="mb-3">
-                        <label for="lastName" class="form-label">Nom</label>
-                        <input type="text" class="form-control" name="lastName" id="lastName" placeholder="Nom">
+                        <label for="lastName" class="form-label">Nom de famille </label>
+                        <input type="text" class="form-control" name="lastName" id="lastName" 
+                        value="<%= contact.lastName %>"
+                        placeholder=<%= contact.lastName %>>
                     </div>
 
                     <div class="mb-3">
-                        <label for="firstName" class="form-label">Prénom</label>
-                        <input type="text" class="form-control" name="firstName" id="firstName" placeholder="Prénom">
+                        <label for="firstName" class="form-label">Prénom></label>
+                        <input type="text" class="form-control" name="firstName" id="firstName" 
+                        value="<%= contact.firstName %>"
+                        placeholder=<%= contact.firstName %>">
                     </div>
 
                     <div class="mb-3">
-                        <label for="company" class="form-label">Société</label>
-                        <input type="text" class="form-control" name="company" id="company" placeholder="Société">
+                        <label for="company" class="form-label">Nom de l'entreprise</label>
+                        <input type="text" class="form-control" name="company" id="company" 
+                        value="<%= contact.company %>"
+                        placeholder=<%= contact.company %>>
                     </div>
-                    
                     <div class="mb-3">
-                        <label for="address" class="form-label">Adresse</label>
-                        <input type="text" class="form-control" name="address" id="address" placeholder="Adresse">
+                        <label for="address" class="form-label">Adresse complète</label>
+                        <input type="text" class="form-control" name="address" id="address" 
+                        value="<%= contact.address %>"
+                        placeholder=<%= contact.address %>>
                     </div>
-                                        
+
                     <div class="mb-3">
                         <label for="phone" class="form-label">Tel</label>
-                        <input type="text" class="form-control" name="phone" id="phone" placeholder="Tel">
+                        <input type="text" class="form-control" name="phone" id="phone"  
+                        pattern="^\d{10}$"
+                        title="Veuillez entrer un numéro de téléphone composé de 10 chiffres sans espaces."
+                        value="<%= contact.phone %>"
+                        placeholder=<%= contact.phone %>>
                     </div>
 
                     <div class="mb-3">
-                        <label for="email" class="form-label">E-Mail</label>
-                        <input type="text" class="form-control" name="email" id="email" placeholder="E-Mail">
+                        <label for="email" class="form-label"><%= contact.email %></label>
+                        <input type="text" class="form-control" name="email" id="email" 
+                        value="<%= contact.email %>"
+                        placeholder=<%= contact.email %>>
                     </div>
 
                     <div class="mb-3">
                         <label for="sector" class="form-label">Secteur</label>
                         <select  name="sector" id="sector" class="form-select">
-                            <option value="industrie">Industrie</option>
-                            <option value="informatique">Informatique</option>
-                            <option value="sante">Santé</option>
-                            <option value="education">Education</option>
+                            <option value="sante" <%= contact.sector === 'sante' ? 'selected' : '' %>>Santé</option>
+                            <option value="industrie" <%= contact.sector === 'industrie' ? 'selected' : '' %>>Industrie</option>
+                            <option value="informatique" <%= contact.sector === 'informatique' ? 'selected' : '' %>>Informatique</option>
+                            <option value="education" <%= contact.sector === 'education' ? 'selected' : '' %>>Education</option>
                         </select>
                     </div>
 
                     <div class="mb-3">
-                        <label for="status" class="form-label">Actif ?</label>
-                        <input type="checkbox" name="actif" id="actif">
+                        <label for="status" class="form-label">Actif </label>
+                        <input type="checkbox" name="actif" id="actif" <%= contact.actif ? 'checked' : '' %>>
                     </div>
                     
                     <div class="d-grid gap-2 col-6 mx-auto">
