@@ -26,10 +26,28 @@
 5. Routes
     routes user x5
     routes contact x 5
+    authRoute
     App.js
 
 6. Controllers
+    UserApiController
+    ContactApiController
+    authController
+
+7. Tests POSTMAN
 
 
-7. Views
+-------
+Liens avec les Views
+-------
 
+8. Code Views et  Routes Views pour actions Contacts
+    action des form
+
+    ContactRouteView:
+    AJOUTER
+    MODIFIER
+    VOIR
+    SUPPRIMER
+
+    ContactViewController
