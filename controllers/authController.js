@@ -4,13 +4,13 @@ const contactService = require('../services/contactApiService');
 
 
 //RENDU Page de connection
-exports.showLoginPage = (req, res) => {
+module.exports.showLoginPage = (req, res) => {
     res.render('connection', {message : ''});
 };
 
 
 //AUTHENTIFICATION
-exports.login = async (req, res) => {
+module.exports.login = async (req, res) => {
     try{
         const { email, password } = req.body;
         const user = await authService.authenticate( email, password);
@@ -33,10 +33,11 @@ exports.login = async (req, res) => {
 
 
 //RENDU HomePage après authentification
-exports.showHomePage = async (req, res) => {
+module.exports.showHomePage = async (req, res) => {
      try {
-        const userId = req.session.user.id;
-        const contacts = await contactService.getContacts({ user: userId });
+        
+        console.log('Session user:', req.session.user);
+        const contacts = await contactService.getContacts({ user: req.session.user._id});
         res.render('home', { user: req.session.user, contacts });
     } catch (error) {
         res.status(500).send('Erreur lors de la récupération des contacts');

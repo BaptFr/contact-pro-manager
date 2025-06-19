@@ -21,39 +21,39 @@
                         
                         <tr>
                             <td width="30%">ID :</td>
-                            <td>1</td>
+                            <td><%= contact._id %></td>
                         </tr>
                         <tr>
                             <td width="30%">Nom :</td>
-                            <td>Rondeau</td>
+                            <td><%= contact.lastName %></td>
                         </tr>
                         <tr>
                             <td width="30%">Prénom :</td>
-                            <td>Julien</td>
+                            <td><%= contact.firstName %></td>
                         </tr>
                         <tr>
                             <td width="30%">Société :</td>
-                            <td>Apollo</td>
+                            <td><%= contact.company %></td>
                         </tr>
                         <tr>
                             <td width="30%">Adresse :</td>
-                            <td>96 Bd Marius Vivier Merle, 69003 Lyon</td>
+                            <td><%= contact.address %></td>
                         </tr>                            
                         <tr>
                             <td width="30%">Tel</td>
-                            <td>04 78 35 45 70</td>
+                            <td><%= contact.phone %></td>
                         </tr>     
                         <tr>
                             <td width="30%">Email</td>
-                            <td>rondeau@appolo.fr</td>
+                            <td><%= contact.email %></td>
                         </tr>     
                         <tr>
                             <td width="30%">Secteur</td>
-                            <td>Informatique</td>
+                            <td><%= contact.sector %></td>
                         </tr>     
                         <tr>
                             <td width="30%">Actif</td>
-                            <td>Oui</td>
+                            <td><%= contact.actif ? 'Oui' : 'Non' %></td>
                         </tr> 
                         <tr>
                             <td colspan="2">
